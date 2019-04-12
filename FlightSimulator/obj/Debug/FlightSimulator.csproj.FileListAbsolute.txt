@@ -72,3 +72,26 @@ C:\Users\roy\Desktop\Roy\לימודים\שנה ב'\סמסטר ב'\תכנות מ�
 C:\Users\roy\Desktop\Roy\לימודים\שנה ב'\סמסטר ב'\תכנות מתקדם 2\מטלות\מטלה 2\Ex2\FlightSimulator\FlightSimulator\obj\Debug\FlightSimulator.csproj.CopyComplete
 C:\Users\roy\Desktop\Roy\לימודים\שנה ב'\סמסטר ב'\תכנות מתקדם 2\מטלות\מטלה 2\Ex2\FlightSimulator\FlightSimulator\obj\Debug\FlightSimulator.exe
 C:\Users\roy\Desktop\Roy\לימודים\שנה ב'\סמסטר ב'\תכנות מתקדם 2\מטלות\מטלה 2\Ex2\FlightSimulator\FlightSimulator\obj\Debug\FlightSimulator.pdb
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\bin\Debug\FlightSimulator.exe.config
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\bin\Debug\FlightSimulator.exe
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\bin\Debug\FlightSimulator.pdb
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\bin\Debug\DynamicDataDisplay.dll
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\bin\Debug\DynamicDataDisplay.xml
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.csprojAssemblyReference.cache
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\Joystick.baml
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\MainWindow.g.cs
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\FlightBoard.g.cs
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\Joystick.g.cs
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\App.g.cs
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator_MarkupCompile.cache
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator_MarkupCompile.lref
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\MainWindow.baml
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\FlightBoard.baml
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.g.resources
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.Properties.Resources.resources
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.csproj.GenerateResource.cache
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.csproj.CoreCompileInputs.cache
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.csproj.CopyComplete
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.exe
+C:\Users\Einat\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.pdb
