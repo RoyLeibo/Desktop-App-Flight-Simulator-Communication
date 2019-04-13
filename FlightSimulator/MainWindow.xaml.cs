@@ -33,5 +33,10 @@ namespace FlightSimulator
         {
 
         }
+
+        private void Joystick_Loaded_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
