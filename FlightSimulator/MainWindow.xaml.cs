@@ -34,9 +34,10 @@ namespace FlightSimulator
 
         }
 
-        private void Joystick_Loaded_1(object sender, RoutedEventArgs e)
+        private void Button_Settings_Click(object sender, RoutedEventArgs e)
         {
-
+            FlightSimulator.Views.Windows.SettingsWindow sw = new FlightSimulator.Views.Windows.SettingsWindow();
+            sw.Show();
         }
     }
 }

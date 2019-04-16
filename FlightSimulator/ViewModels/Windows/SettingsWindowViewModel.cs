@@ -13,6 +13,7 @@ namespace FlightSimulator.ViewModels.Windows
     public class SettingsWindowViewModel : BaseNotify
     {
         private ISettingsModel model;
+        public event EventHandler OnRequestClose;
 
         public SettingsWindowViewModel(ISettingsModel model)
         {
@@ -48,8 +49,6 @@ namespace FlightSimulator.ViewModels.Windows
                 NotifyPropertyChanged("FlightInfoPort");
             }
         }
-
-     
 
         public void SaveSettings()
         {
