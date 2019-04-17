@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="50">
             </RowDefinition>
@@ -38,7 +38,7 @@
         </Button>
             </Grid>
         <Grid Grid.Row="1">
-            <local:FlightBoard />
+            <local:FlightBoard/>
         </Grid>
     </Grid>
 </UserControl>

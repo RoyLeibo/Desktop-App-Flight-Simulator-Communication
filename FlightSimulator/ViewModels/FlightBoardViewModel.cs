@@ -8,22 +8,37 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FlightSimulator.ViewModels.Windows;
 using FlightSimulator.Views.Windows;
+using System.Windows;
 
 namespace FlightSimulator.ViewModels
 {
+    public delegate void handler();
     public class FlightBoardViewModel : BaseNotify
     {
-
-
-
+        public event handler ThisEvent;
+        private ApplicationConnectModel ACM;
         public double Lon
         {
-            get;
+            get
+            {
+                return this.Lon;
+            }
+            set
+            {
+                this.Lon = value;
+            }
         }
 
         public double Lat
         {
-            get;
+            get
+            {
+                return this.Lat;
+            }
+            set
+            {
+                this.Lat = value;
+            }
         }
 
         #region Commands
@@ -38,6 +53,7 @@ namespace FlightSimulator.ViewModels
         }
         private void SettingsClick()
         {
+            MessageBox.Show("sdds");
            var swvm = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
            var sw = new SettingsWindow() {DataContext = swvm};
            swvm.OnRequestClose += (s, e) => sw.Close();
@@ -53,15 +69,24 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return _settingsCommand ?? (_settingsCommand = new CommandHandler(() => ConnectClick()));
+                return _connectCommand ?? (_connectCommand = new CommandHandler(() => ConnectClick()));
             }
         }
         private void ConnectClick()
         {
-            ApplicationConnectModel ACM = new ApplicationConnectModel(ApplicationSettingsModel.Instance);
+            this.ACM = new ApplicationConnectModel(ApplicationSettingsModel.Instance);
+            this.ACM.Io.ThisEvent += () =>
+            {
+                KeyValuePair<double, double> LonAndLat = this.ACM.Io.LonAndLat;
+                this.Lon = LonAndLat.Key;
+                this.Lat = LonAndLat.Value;
+                ThisEvent?.Invoke();
+            };
             ACM.Connect();
         }
         #endregion
         #endregion
+
+
     }
 }

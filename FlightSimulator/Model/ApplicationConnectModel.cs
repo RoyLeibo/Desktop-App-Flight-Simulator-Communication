@@ -17,10 +17,23 @@ namespace FlightSimulator.Model
         private Thread n_client;
         private TcpClient client;
         private TcpListener server;
+        private IO io;
+        public IO Io
+        {
+            get
+            {
+                return this.io;
+            }
+            set
+            {
+                this.io = value;
+            }
+        }
 
         public ApplicationConnectModel(ISettingsModel ASM)
         {
             this.ASM = ASM;
+            this.io = new IO();
         }
 
         public void Connect()
@@ -28,13 +41,14 @@ namespace FlightSimulator.Model
             this.n_client = new Thread(new ThreadStart(Client));
             this.server = new TcpListener(IPAddress.Parse(ASM.FlightServerIP), ASM.FlightCommandPort);
             this.server.Start();
+            Socket socket = this.server.AcceptSocket();
         }
 
         public void Client()
         {
             this.client = new TcpClient();
             client.Connect(ASM.FlightServerIP, ASM.FlightInfoPort);
-            FlightSimulator.Model.IO.ReadDataFromSimulator(this.client);
+            this.io.ReadDataFromSimulator(this.client);
         } 
     }
 }

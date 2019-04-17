@@ -28,4 +28,5 @@
         <Button Content="OK" Grid.Row="3" Grid.Column="0" Height="50" Width="50" Command="{Binding ClickCommand}"></Button>
         <Button Content="Cancel" Grid.Row="3" Grid.Column="1" Height="50" Width="50" Command="{Binding CancelCommand}"></Button>
     </Grid>
+    
 </Window>

@@ -49,7 +49,7 @@ namespace FlightSimulator.Model
                     {
                         Result += StringData.Substring(0, EndOfLine);
                         StringData.Remove(EndOfLine + 1);
-                        //parser
+                        ParseAndUpdate(StringData);
                         Result = "";
                         Remainder = "";
                     }

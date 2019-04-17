@@ -33,11 +33,5 @@ namespace FlightSimulator
         {
 
         }
-
-        private void Button_Settings_Click(object sender, RoutedEventArgs e)
-        {
-            FlightSimulator.Views.Windows.SettingsWindow sw = new FlightSimulator.Views.Windows.SettingsWindow();
-            sw.Show();
-        }
     }
 }
