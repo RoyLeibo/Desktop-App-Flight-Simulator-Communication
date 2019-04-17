@@ -155,11 +155,13 @@ namespace FlightSimulator.Views
             if (Moved == null ||
                 (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
+            else
+            {
+                _prevAileron = Aileron;
+                _prevElevator = Elevator;
+            }
 
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
-            _prevAileron = Aileron;
-            _prevElevator = Elevator;
-
         }
 
         private void Knob_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

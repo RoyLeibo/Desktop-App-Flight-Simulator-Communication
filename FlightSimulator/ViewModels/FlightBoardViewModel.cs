@@ -53,7 +53,6 @@ namespace FlightSimulator.ViewModels
         }
         private void SettingsClick()
         {
-            MessageBox.Show("sdds");
            var swvm = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
            var sw = new SettingsWindow() {DataContext = swvm};
            swvm.OnRequestClose += (s, e) => sw.Close();

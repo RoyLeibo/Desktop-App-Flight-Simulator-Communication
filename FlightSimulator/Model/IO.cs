@@ -51,7 +51,7 @@ namespace FlightSimulator.Model
                         StringData.Remove(EndOfLine + 1);
                         ParseAndUpdate(StringData);
                         Result = "";
-                        Remainder = "";
+                        Remainder = StringData;
                     }
                     else
                     {
