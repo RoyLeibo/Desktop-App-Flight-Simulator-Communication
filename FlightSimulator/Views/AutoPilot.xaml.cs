@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlightSimulator.ViewModels;
+using FlightSimulator.Model;
 
 namespace FlightSimulator.Views
 {
@@ -23,6 +25,8 @@ namespace FlightSimulator.Views
         public AutoPilot()
         {
             InitializeComponent();
+            AutoPilotViewModel APVM = new AutoPilotViewModel(new AutoPilotModel());
+            this.DataContext = APVM;
         }
     }
 }

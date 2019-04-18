@@ -11,6 +11,8 @@ namespace FlightSimulator.Model
     public class IO
     {
         public event handler ThisEvent;
+        public Socket socket { get; set; }
+        
         private KeyValuePair<double, double> lonAndLat;
         public KeyValuePair<double, double> LonAndLat
         {
@@ -69,6 +71,12 @@ namespace FlightSimulator.Model
             double Lon = Double.Parse(StringData.Substring(StartOfLon, EndOfLon));
             double Lat = Double.Parse(StringData.Substring(EndOfLon + 1, StringData.IndexOf(',', StartOfLon)));
             this.LonAndLat = new KeyValuePair<double, double>(Lon, Lat); 
+        }
+
+        public void SendCommandToSimulator(String command)
+        {
+            ASCIIEncoding asen = new ASCIIEncoding();
+            this.socket.Send(asen.GetBytes(command));
         }
     }
 }

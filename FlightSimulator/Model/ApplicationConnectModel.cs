@@ -41,7 +41,7 @@ namespace FlightSimulator.Model
             this.n_client = new Thread(new ThreadStart(Client));
             this.server = new TcpListener(IPAddress.Parse(ASM.FlightServerIP), ASM.FlightCommandPort);
             this.server.Start();
-            Socket socket = this.server.AcceptSocket();
+            this.io.socket = this.server.AcceptSocket();
         }
 
         public void Client()

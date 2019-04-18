@@ -77,6 +77,7 @@ namespace FlightSimulator.Views
 
         public FlightMonitor()
         {
+            InitializeComponent();
             FlightBoardViewModel FBVM = new FlightBoardViewModel();
             this.DataContext = FBVM;
             FBVM.ThisEvent += () =>
@@ -84,7 +85,6 @@ namespace FlightSimulator.Views
                 this.NewLon = FBVM.Lon;
                 this.NewLat = FBVM.Lat;
             };
-            InitializeComponent();
         }
 
         //public void draw
