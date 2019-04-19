@@ -23,6 +23,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 this.rudder = value;
+                this.VJEA.Io.UpdateDataInSimulator("Rudder", value);
             }
         }
 
@@ -36,6 +37,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 this.throttle = value;
+                this.VJEA.Io.UpdateDataInSimulator("Throttle", value);
             }
         }
 
@@ -49,6 +51,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 this.elevator = value;
+                this.VJEA.Io.UpdateDataInSimulator("Elevator", value);
             }
         }
 
@@ -62,6 +65,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 this.ailron = value;
+                this.VJEA.Io.UpdateDataInSimulator("Ailron", value);
             }
         }
 
