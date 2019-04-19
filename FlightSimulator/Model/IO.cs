@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -10,8 +11,9 @@ namespace FlightSimulator.Model
     public delegate void handler();
     public class IO
     {
-        public event handler ThisEvent;
+        public event handler IoEvent;
         public Socket socket { get; set; }
+        public TcpClient client { get; set; }
         
         private KeyValuePair<double, double> lonAndLat;
         public KeyValuePair<double, double> LonAndLat
@@ -23,13 +25,12 @@ namespace FlightSimulator.Model
             set
             {
                 this.lonAndLat = value;
-                ThisEvent?.Invoke();
+                IoEvent?.Invoke();
             }
         }
 
-        public void ReadDataFromSimulator(TcpClient client)
+        public void ReadDataFromSimulator(TcpListener client)
         {
-            NetworkStream ns = client.GetStream();
             byte[] Buffer = new byte[1024];
             int recv = 0;
             int EndOfLine = 0;
@@ -40,7 +41,7 @@ namespace FlightSimulator.Model
             while (true)
             {
                 StringData = "";
-                recv = ns.Read(Buffer, 0, Buffer.Length);
+                recv = this.socket.Receive(Buffer);
                 StringData = Encoding.ASCII.GetString(Buffer, 0, recv);
                 IsEndOfLine = true;
                 Result = Remainder;
@@ -76,7 +77,45 @@ namespace FlightSimulator.Model
         public void SendCommandToSimulator(String command)
         {
             ASCIIEncoding asen = new ASCIIEncoding();
-            this.socket.Send(asen.GetBytes(command));
+            Stream stream = this.client.GetStream();
+            string[] CommandsArray = command.Split('\n');
+            foreach (string Command in CommandsArray)
+            {
+                byte[] ByteArray = asen.GetBytes(command);
+                stream.Write(ByteArray, 0, ByteArray.Length);
+                stream.Flush();
+            }
+        }
+
+        public void UpdateDataInSimulator(String DataName, double value)
+        {
+            ASCIIEncoding asen = new ASCIIEncoding();
+            Stream stream = this.client.GetStream();
+            byte[] ByteArray;
+            String command;
+            switch (DataName) {
+                case "Ailron":
+                    command = "set /controls/flight/aileron " + value;
+                    ByteArray = asen.GetBytes(command);
+                    break;
+                case "Elevator":
+                    command = "set /controls/flight/elevator " + value;
+                    ByteArray = asen.GetBytes(command);
+                    break;
+                case "Throttle":
+                    command = "set /controls/engines/current-engine/throttle " + value;
+                    ByteArray = asen.GetBytes(command);
+                    break;
+                case "Rudder":
+                    command = "set /controls/flight/rudder " + value; 
+                    ByteArray = asen.GetBytes(command);
+                    break;
+                default:
+                    ByteArray = asen.GetBytes("");
+                    break;
+            }
+            stream.Write(ByteArray, 0, ByteArray.Length);
+            stream.Flush();
         }
     }
 }

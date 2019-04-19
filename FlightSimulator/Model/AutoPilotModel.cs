@@ -10,8 +10,8 @@ namespace FlightSimulator.Model
     {
         public void SendCommandToSimulator(String command)
         {
-            ASCIIEncoding asen = new ASCIIEncoding();
-            s.Send(asen.GetBytes(command));
+            //ASCIIEncoding asen = new ASCIIEncoding();
+            //s.Send(asen.GetBytes(command));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FlightSimulator.ViewModels
 {
     class ManualPilotViewModel
     {
-        private ManualPilotModel VJEA;
+        private ApplicationModel VJEA;
         private double rudder;
         public double Rudder
         {
@@ -71,7 +71,7 @@ namespace FlightSimulator.ViewModels
             this.Elevator = VJEA.Elevator;
         }
 
-        public ManualPilotViewModel(ManualPilotModel VJEA)
+        public ManualPilotViewModel(ApplicationModel VJEA)
         {
             this.VJEA = VJEA;
         }

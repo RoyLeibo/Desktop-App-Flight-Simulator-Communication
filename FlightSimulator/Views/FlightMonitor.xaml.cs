@@ -80,7 +80,7 @@ namespace FlightSimulator.Views
             InitializeComponent();
             FlightBoardViewModel FBVM = new FlightBoardViewModel();
             this.DataContext = FBVM;
-            FBVM.ThisEvent += () =>
+            FBVM.FVBMEvent += () =>
             {
                 this.NewLon = FBVM.Lon;
                 this.NewLat = FBVM.Lat;

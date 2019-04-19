@@ -25,7 +25,15 @@ namespace FlightSimulator.Views
         public AutoPilot()
         {
             InitializeComponent();
-            AutoPilotViewModel APVM = new AutoPilotViewModel(new AutoPilotModel());
+            AutoPilotViewModel APVM = new AutoPilotViewModel(ApplicationModel.Instance);
+            APVM.TextBoxData += () =>
+            {
+                return this.CommandsTextBox.Text;
+            };
+            APVM.TextBoxClear += () =>
+            {
+                this.CommandsTextBox.Clear();
+            };
             this.DataContext = APVM;
         }
     }

@@ -15,8 +15,8 @@ namespace FlightSimulator.ViewModels
     public delegate void handler();
     public class FlightBoardViewModel : BaseNotify
     {
-        public event handler ThisEvent;
-        private ApplicationConnectModel ACM;
+        public event handler FVBMEvent;
+        private ApplicationModel AM;
         public double Lon
         {
             get
@@ -53,7 +53,7 @@ namespace FlightSimulator.ViewModels
         }
         private void SettingsClick()
         {
-           var swvm = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
+           var swvm = new SettingsWindowViewModel(ApplicationModel.Instance);
            var sw = new SettingsWindow() {DataContext = swvm};
            swvm.OnRequestClose += (s, e) => sw.Close();
            sw.Show();
@@ -73,15 +73,15 @@ namespace FlightSimulator.ViewModels
         }
         private void ConnectClick()
         {
-            this.ACM = new ApplicationConnectModel(ApplicationSettingsModel.Instance);
-            this.ACM.Io.ThisEvent += () =>
+            this.AM = ApplicationModel.Instance;
+            this.AM.Io.IoEvent += () =>
             {
-                KeyValuePair<double, double> LonAndLat = this.ACM.Io.LonAndLat;
+                KeyValuePair<double, double> LonAndLat = this.AM.Io.LonAndLat;
                 this.Lon = LonAndLat.Key;
                 this.Lat = LonAndLat.Value;
-                ThisEvent?.Invoke();
+                FVBMEvent?.Invoke();
             };
-            ACM.Connect();
+            AM.Connect();
         }
         #endregion
         #endregion

@@ -25,9 +25,9 @@
         <TextBox x:Name="InfoPort" Grid.Row ="1" Grid.Column ="2" Padding =" 3" Margin ="3" Text="{Binding FlightInfoPort}" >
         </TextBox>
         <TextBlock Grid.Row =" 2" Padding="3" Margin =" 3">Flight Command Port:</TextBlock>
-        <TextBox x:Name="CommandPort" Grid.Row ="2" Grid.Column =" 2" Padding =" 3" Margin =" 3" Text="{Binding FlightCommandPort}">
+        <TextBox x:Name="CommandPort" Grid.Row ="2" Grid.Column =" 2" Padding =" 3" Margin ="3" Text="{Binding FlightCommandPort}">
         </TextBox>
-        <Button Content="OK" Grid.Row="4" Grid.Column="0" Height="20" Width="50" Command="{Binding okCommand}" Margin="20" HorizontalAlignment="Right"></Button>
+        <Button Content="OK" Grid.Row="4" Grid.Column="0" Height="20" Width="50" Command="{Binding OkCommand}" Margin="20" HorizontalAlignment="Right"></Button>
         <Button Content="Cancel" Grid.Row="4" Grid.Column="1" Height="20" Width="50" HorizontalAlignment="Left" Margin="20" Command="{Binding CancelCommand}"></Button>
     </Grid>
 

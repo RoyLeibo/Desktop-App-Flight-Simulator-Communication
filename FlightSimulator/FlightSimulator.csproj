@@ -65,6 +65,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ApplicationConnectModel.cs" />
+    <Compile Include="Model\ApplicationModel.cs" />
     <Compile Include="Model\ApplicationSettingsModel.cs" />
     <Compile Include="Model\AutoPilotModel.cs" />
     <Compile Include="Model\CommandHandler.cs" />

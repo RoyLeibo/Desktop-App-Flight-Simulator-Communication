@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using FlightSimulator.Model;
+using FlightSimulator.ViewModels;
 
 namespace FlightSimulator.ViewModels
 {
+    public delegate string TextBoxData();
+    public delegate void TextBoxClear();
     class AutoPilotViewModel
     {
-        private AutoPilotModel APM;
+        private ApplicationModel AM;
+        public event TextBoxData TextBoxData;
+        public event TextBoxClear TextBoxClear;
 
-        public AutoPilotViewModel(AutoPilotModel APM)
+        public AutoPilotViewModel(ApplicationModel AM)
         {
-            this.APM = APM;
+            this.AM = AM;
         }
         #region Commands
         #region OkCommand
@@ -28,7 +34,7 @@ namespace FlightSimulator.ViewModels
         }
         private void OkClick()
         {
-            
+            this.AM.Io.SendCommandToSimulator(TextBoxData?.Invoke()); 
         }
         #endregion
 
@@ -43,7 +49,7 @@ namespace FlightSimulator.ViewModels
         }
         private void OnClear()
         {
-
+            TextBoxClear?.Invoke();
         }
         #endregion
         #endregion
