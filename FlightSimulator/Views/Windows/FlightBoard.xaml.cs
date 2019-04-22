@@ -40,7 +40,7 @@ namespace FlightSimulator.Views
             plotter.AddLineGraph(planeLocations, 2, "Route");
         }
 
-        private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if(e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
             {
@@ -48,8 +48,6 @@ namespace FlightSimulator.Views
                 planeLocations.AppendAsync(Dispatcher, p1);
             }
         }
-
     }
-
 }
 

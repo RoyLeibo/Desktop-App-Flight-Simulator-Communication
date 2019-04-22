@@ -29,7 +29,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="&#8592;rudder&#8594;" VerticalAlignment="Bottom"
                      FontWeight="Bold" Grid.Row="2" HorizontalAlignment="Center" ></TextBlock>
-                <Slider x:Name="RudderSlider" VerticalAlignment="Bottom" Width="240" TickPlacement="BottomRight" Value="{Binding Rudder}" TickFrequency="0.1" HorizontalAlignment="Center" Maximum="1"  Grid.Row="0" Minimum="-1" Margin="130,0,130,5.667"></Slider>
+                <Slider x:Name="RudderSlider" VerticalAlignment="Bottom" Width="240" TickPlacement="BottomRight" Value="{Binding Rudder}" TickFrequency="0.1" HorizontalAlignment="Center" Maximum="1"  Grid.Row="0" Minimum="-1"></Slider>
                 <TextBlock Text="{Binding ElementName=RudderSlider, Path=Value}" FontWeight="Bold" HorizontalAlignment="Center" Height="43" VerticalAlignment="Bottom" Grid.RowSpan="2" ></TextBlock>
             </Grid>
             <Grid Grid.Row="1">
@@ -63,7 +63,7 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <local:Joystick x:Name="Joystick" HorizontalAlignment="Center" VerticalAlignment="Center" Aileron="{Binding Ailron}"/>
+                    <local:Joystick x:Name="Joystick"  HorizontalAlignment="Center" VerticalAlignment="Center" Aileron="{Binding Ailron}" Elevator="{Binding Elevator}"/>
                 </Grid>
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>

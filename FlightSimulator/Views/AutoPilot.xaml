@@ -12,7 +12,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBox x:Name="CommandsTextBox" AcceptsReturn="True" Width="450" Height="300" VerticalAlignment="Top" ></TextBox>
+            <TextBox x:Name="CommandsTextBox" Text="{Binding TextFromTextBox, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Width="450" Height="300" VerticalAlignment="Top">
+                <TextBox.Background>
+                    <SolidColorBrush Color ="{Binding Color}"></SolidColorBrush>
+                </TextBox.Background></TextBox>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

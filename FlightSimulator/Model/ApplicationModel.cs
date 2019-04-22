@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using FlightSimulator.Model.Interface;
 
 namespace FlightSimulator.Model
@@ -52,6 +53,9 @@ namespace FlightSimulator.Model
 
         ApplicationModel()
         {
+            this.io = new IO();
+            this.client = new TcpClient();
+            this.io.client = this.client;
         }
 
         public static ApplicationModel Instance
@@ -81,18 +85,27 @@ namespace FlightSimulator.Model
 
         public void Connect()
         {
-            this.io = new IO();
+            
             this.n_server = new Thread(new ThreadStart(Server));
-            this.client = new TcpClient();
-            client.Connect(FlightServerIP, FlightInfoPort);
+            this.n_server.Start();
+            this.client.Connect(FlightServerIP, FlightCommandPort);
         }
 
         public void Server()
         {
-            this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightCommandPort);
-            this.server.Start();
-            this.io.socket = this.server.AcceptSocket();
-            this.io.ReadDataFromSimulator(this.server);
+            try
+            {
+                this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort);
+                this.server.Start();
+                MessageBox.Show("Before Accpetting");
+                this.io.socket = this.server.AcceptSocket();
+                MessageBox.Show("socket accepted");
+                this.io.ReadDataFromSimulator(this.server);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.StackTrace);
+            }
         }
     }
 }

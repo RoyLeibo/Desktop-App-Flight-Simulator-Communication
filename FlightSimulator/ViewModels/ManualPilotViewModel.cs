@@ -24,6 +24,7 @@ namespace FlightSimulator.ViewModels
             {
                 this.rudder = value;
                 this.VJEA.Io.UpdateDataInSimulator("Rudder", value);
+                
             }
         }
 

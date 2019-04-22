@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +17,9 @@ using FlightSimulator.ViewModels;
 
 namespace FlightSimulator.Views
 {
-    /// <summary>
-    /// Interaction logic for FlightMonitor.xaml
-    /// </summary>
     public partial class FlightMonitor : UserControl
     {
+        public event PropertyChangedEventHandler drawEvent;
         private double oldLon;
         public double OldLon
         {
@@ -84,7 +83,9 @@ namespace FlightSimulator.Views
             {
                 this.NewLon = FBVM.Lon;
                 this.NewLat = FBVM.Lat;
+                this.drawEvent?.Invoke(this, null);
             };
+            this.drawEvent += this.FlightBoard.Vm_PropertyChanged;
         }
 
         //public void draw

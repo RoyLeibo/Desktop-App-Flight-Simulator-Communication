@@ -26,14 +26,15 @@ namespace FlightSimulator.Views
         {
             InitializeComponent();
             AutoPilotViewModel APVM = new AutoPilotViewModel(ApplicationModel.Instance);
-            APVM.TextBoxData += () =>
-            {
-                return this.CommandsTextBox.Text;
-            };
             APVM.TextBoxClear += () =>
             {
                 this.CommandsTextBox.Clear();
             };
+            Console.WriteLine("I am inside AutoPilot");
+            //APVM.AM.Io.colorEvent += () =>
+            //{
+            //    this.CommandsTextBox.Background = Brushes.White;
+            //};
             this.DataContext = APVM;
         }
     }

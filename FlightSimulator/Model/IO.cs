@@ -4,16 +4,22 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FlightSimulator.Model
 {
     public delegate void handler();
+    public delegate void whiteScreen();
     public class IO
     {
         public event handler IoEvent;
+        public event whiteScreen colorEvent;
         public Socket socket { get; set; }
         public TcpClient client { get; set; }
+        public string command;
+        public Thread newThread;
         
         private KeyValuePair<double, double> lonAndLat;
         public KeyValuePair<double, double> LonAndLat
@@ -31,6 +37,7 @@ namespace FlightSimulator.Model
 
         public void ReadDataFromSimulator(TcpListener client)
         {
+            MessageBox.Show("Inside ReadDataFromSimulator");
             byte[] Buffer = new byte[1024];
             int recv = 0;
             int EndOfLine = 0;
@@ -71,10 +78,18 @@ namespace FlightSimulator.Model
             int EndOfLon = StringData.IndexOf(',', StartOfLon);
             double Lon = Double.Parse(StringData.Substring(StartOfLon, EndOfLon));
             double Lat = Double.Parse(StringData.Substring(EndOfLon + 1, StringData.IndexOf(',', StartOfLon)));
-            this.LonAndLat = new KeyValuePair<double, double>(Lon, Lat); 
+            this.LonAndLat = new KeyValuePair<double, double>(Lon, Lat);
+            MessageBox.Show
+                ($"Lon: {this.LonAndLat.Key}, Lat: {this.LonAndLat.Value}");
         }
 
         public void SendCommandToSimulator(String command)
+        {
+            this.command = command;
+            this.newThread = new Thread(new ThreadStart(FunctionInThread));
+        }
+
+        public void FunctionInThread()
         {
             ASCIIEncoding asen = new ASCIIEncoding();
             Stream stream = this.client.GetStream();
@@ -84,7 +99,10 @@ namespace FlightSimulator.Model
                 byte[] ByteArray = asen.GetBytes(command);
                 stream.Write(ByteArray, 0, ByteArray.Length);
                 stream.Flush();
+
             }
+            this.colorEvent?.Invoke();
+            this.newThread.Abort();
         }
 
         public void UpdateDataInSimulator(String DataName, double value)

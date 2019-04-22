@@ -38,7 +38,7 @@
         </Button>
             </Grid>
         <Grid Grid.Row="1">
-            <local:FlightBoard/>
+            <local:FlightBoard x:Name="FlightBoard"/>
         </Grid>
     </Grid>
 </UserControl>
