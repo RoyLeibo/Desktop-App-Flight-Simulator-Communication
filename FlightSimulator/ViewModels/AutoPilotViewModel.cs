@@ -23,7 +23,8 @@ namespace FlightSimulator.ViewModels
         {
             this.AM = AM;
             isFirstLetter = true;
-            AM.Io.colorEvent += () => { this.Color = Colors.White; };
+            AM.Io.colorEvent += () => { IsPink = false; isFirstLetter = true; };
+            this.IsPink = false;
         }
 
         private string textFromTextBox;
@@ -38,23 +39,23 @@ namespace FlightSimulator.ViewModels
                 this.textFromTextBox = value;
                 if (isFirstLetter)
                 {
-                    Color = Colors.Pink;
+                    IsPink = true;
                     isFirstLetter = false;
-                } 
+                }
             }
         }
-
-        public System.Windows.Media.Color color;
-        public System.Windows.Media.Color Color
+        private bool isPink;
+        public bool IsPink
         {
             get
             {
-                return this.color;
+                return isPink;
             }
             set
             {
-                this.color = value;
+                isPink = value;
             }
+
         }
 
         #region Commands
@@ -69,7 +70,7 @@ namespace FlightSimulator.ViewModels
         }
         private void OkClick()
         {
-            this.AM.Io.SendCommandToSimulator(this.TextFromTextBox); 
+            this.AM.Io.SendCommandToSimulator(this.TextFromTextBox);
         }
         #endregion
 
@@ -103,5 +104,10 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
         #endregion
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return 1;
+        }
     }
 }

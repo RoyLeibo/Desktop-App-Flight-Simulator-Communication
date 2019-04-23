@@ -9,10 +9,11 @@ using System.Windows.Input;
 using FlightSimulator.ViewModels.Windows;
 using FlightSimulator.Views.Windows;
 using System.Windows;
+using System.ComponentModel;
 
 namespace FlightSimulator.ViewModels
 {
-    public delegate void handler();
+    public delegate void handler(object sender, PropertyChangedEventArgs e);
     public class FlightBoardViewModel : BaseNotify
     {
         public event handler FVBMEvent;
@@ -79,7 +80,7 @@ namespace FlightSimulator.ViewModels
                 KeyValuePair<double, double> LonAndLat = this.AM.Io.LonAndLat;
                 this.Lon = LonAndLat.Key;
                 this.Lat = LonAndLat.Value;
-                FVBMEvent?.Invoke();
+                FVBMEvent?.Invoke(this, null);
             };
             AM.Connect();
         }

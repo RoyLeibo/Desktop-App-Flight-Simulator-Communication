@@ -29,6 +29,15 @@ namespace FlightSimulator.Views
         public FlightBoard()
         {
             InitializeComponent();
+            FlightBoardViewModel FBVM = new FlightBoardViewModel();
+            FBVM.FVBMEvent += Vm_PropertyChanged;
+            this.DataContext = FBVM;
+            //FBVM.FVBMEvent += () =>
+            //{
+            //    this.NewLon = FBVM.Lon;
+            //    this.NewLat = FBVM.Lat;
+            //    this.drawEvent?.Invoke(this, null);
+            //};
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -42,12 +51,12 @@ namespace FlightSimulator.Views
 
         public void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
+            var Sender = sender as FlightBoardViewModel;
+            if (Sender != null)
             {
-                Point p1 = new Point(0,0);            // Fill here!
+                Point p1 = new Point(Sender.Lat, Sender.Lon);
                 planeLocations.AppendAsync(Dispatcher, p1);
             }
         }
     }
 }
-
