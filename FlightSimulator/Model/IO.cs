@@ -20,7 +20,7 @@ namespace FlightSimulator.Model
         public TcpClient client { get; set; }
         public string command;
         public Thread newThread;
-        
+
         private KeyValuePair<double, double> lonAndLat;
         public KeyValuePair<double, double> LonAndLat
         {
@@ -33,6 +33,11 @@ namespace FlightSimulator.Model
                 this.lonAndLat = value;
                 IoEvent?.Invoke();
             }
+        }
+
+        public IO(){
+            this.LonAndLat = new KeyValuePair<double, double>(0, 0);
+            this.LonAndLat = new KeyValuePair<double, double>(1, 1);
         }
 
         public void ReadDataFromSimulator(TcpListener client)
@@ -58,7 +63,7 @@ namespace FlightSimulator.Model
                     if (EndOfLine != -1)
                     {
                         Result += StringData.Substring(0, EndOfLine);
-                        StringData.Remove(EndOfLine + 1);
+                        StringData.Remove(0, EndOfLine + 1);
                         ParseAndUpdate(StringData);
                         Result = "";
                         Remainder = StringData;
@@ -76,11 +81,13 @@ namespace FlightSimulator.Model
         {
             int StartOfLon = StringData.IndexOf(',') + 1;
             int EndOfLon = StringData.IndexOf(',', StartOfLon);
-            double Lon = Double.Parse(StringData.Substring(StartOfLon, EndOfLon));
-            double Lat = Double.Parse(StringData.Substring(EndOfLon + 1, StringData.IndexOf(',', StartOfLon)));
+            double Lon = Double.Parse(StringData.Substring(StartOfLon, EndOfLon-StartOfLon));
+            int StartOfLat = EndOfLon + 1;
+            int EndOfLat = StringData.IndexOf(',', StartOfLat); 
+            double Lat = Double.Parse(StringData.Substring(StartOfLat, EndOfLat-StartOfLat));
             this.LonAndLat = new KeyValuePair<double, double>(Lon, Lat);
             MessageBox.Show
-                ($"Lon: {this.LonAndLat.Key}, Lat: {this.LonAndLat.Value}");
+                ("Lon: , Lat:");
         }
 
         public void SendCommandToSimulator(String command)

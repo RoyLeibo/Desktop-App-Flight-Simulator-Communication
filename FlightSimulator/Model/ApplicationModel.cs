@@ -56,8 +56,7 @@ namespace FlightSimulator.Model
         {
             this.io = new IO();
             this.client = new TcpClient();
-            this.client1 = new TcpClient();
-            this.io.client = this.client1;
+            this.io.client = this.client;
             this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort);
         }
 
@@ -88,21 +87,21 @@ namespace FlightSimulator.Model
 
         public void Connect()
         {
-            
-           this.n_server = new Thread(new ThreadStart(Server));
-           this.n_server.Start();
+            this.n_server = new Thread(new ThreadStart(Server));
             this.server.Start();
-            this.client = this.server.AcceptTcpClient();
-            this.client1.Connect(FlightServerIP, FlightCommandPort);
+            this.Io.socket = this.server.AcceptSocket();
+            MessageBox.Show("Accepted");
+            this.client.Connect(FlightServerIP, FlightCommandPort);
+            this.n_server.Start();
         }
 
         public void Server()
         {
             try
             {
-                MessageBox.Show("Before Accpetting");
-                this.io.socket = this.server.AcceptSocket();
-                MessageBox.Show("socket accepted");
+                //MessageBox.Show("Before Accpetting");
+                //this.io.socket = this.server.AcceptSocket();
+                //MessageBox.Show("socket accepted");
                 this.io.ReadDataFromSimulator(this.server);
             }
             catch (Exception e)
