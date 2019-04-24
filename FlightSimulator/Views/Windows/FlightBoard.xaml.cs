@@ -32,12 +32,6 @@ namespace FlightSimulator.Views
             FlightBoardViewModel FBVM = new FlightBoardViewModel();
             FBVM.FVBMEvent += Vm_PropertyChanged;
             this.DataContext = FBVM;
-            //FBVM.FVBMEvent += () =>
-            //{
-            //    this.NewLon = FBVM.Lon;
-            //    this.NewLat = FBVM.Lat;
-            //    this.drawEvent?.Invoke(this, null);
-            //};
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

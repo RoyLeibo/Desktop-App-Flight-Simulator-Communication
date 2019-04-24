@@ -12,18 +12,20 @@ using FlightSimulator.ViewModels;
 
 namespace FlightSimulator.ViewModels
 {
-    public delegate void TextBoxClear();
-    class AutoPilotViewModel
+    class AutoPilotViewModel : BaseNotify
     {
         public ApplicationModel AM { get; set; }
-        public event TextBoxClear TextBoxClear;
         public bool isFirstLetter { get; set; }
 
         public AutoPilotViewModel(ApplicationModel AM)
         {
             this.AM = AM;
             isFirstLetter = true;
-            AM.Io.colorEvent += () => { IsPink = false; isFirstLetter = true; };
+            AM.Io.colorEvent += () => {
+                IsPink = false;
+                NotifyPropertyChanged("IsPink");
+                isFirstLetter = true;
+            };
             this.IsPink = false;
         }
 
@@ -37,6 +39,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 this.textFromTextBox = value;
+                NotifyPropertyChanged("TextFromTexrBox");
                 if (isFirstLetter)
                 {
                     IsPink = true;
@@ -54,6 +57,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 isPink = value;
+                NotifyPropertyChanged("IsPink");
             }
 
         }
@@ -85,7 +89,8 @@ namespace FlightSimulator.ViewModels
         }
         private void OnClear()
         {
-            TextBoxClear?.Invoke();
+            TextFromTextBox = "";
+            NotifyPropertyChanged("TextFromTextBox");
         }
         #endregion
 

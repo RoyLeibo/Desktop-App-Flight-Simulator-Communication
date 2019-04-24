@@ -74,14 +74,13 @@ namespace FlightSimulator.Model
 
         public void ParseAndUpdate(String StringData)
         {
-            int StartOfLon = StringData.IndexOf(',') + 1;
+            int StartOfLon = 0;
             int EndOfLon = StringData.IndexOf(',', StartOfLon);
             double Lon = Double.Parse(StringData.Substring(StartOfLon, EndOfLon-StartOfLon));
             int StartOfLat = EndOfLon + 1;
             int EndOfLat = StringData.IndexOf(',', StartOfLat); 
             double Lat = Double.Parse(StringData.Substring(StartOfLat, EndOfLat-StartOfLat));
             this.LonAndLat = new Point(Lat, Lon);
-            MessageBox.Show("Lon: , Lat:");
         }
 
         public void SendCommandToSimulator(String command)
@@ -94,7 +93,7 @@ namespace FlightSimulator.Model
         {
             ASCIIEncoding asen = new ASCIIEncoding();
             Stream stream = this.client.GetStream();
-            string[] CommandsArray = command.Split('\n');
+            string[] CommandsArray = command.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             foreach (string Command in CommandsArray)
             {
                 byte[] ByteArray = asen.GetBytes(command);

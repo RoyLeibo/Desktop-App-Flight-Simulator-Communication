@@ -18,15 +18,16 @@ namespace FlightSimulator.ViewModels
     {
         public event handler FVBMEvent;
         private ApplicationModel AM;
+        private Point lonAndLat;
         public Point LonAndLat
         {
             get
             {
-                return this.LonAndLat;
+                return this.lonAndLat;
             }
             set
             {
-                this.LonAndLat = value;
+                this.lonAndLat = value;
             }
         }
 
