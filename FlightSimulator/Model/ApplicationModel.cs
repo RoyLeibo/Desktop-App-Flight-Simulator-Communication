@@ -18,6 +18,7 @@ namespace FlightSimulator.Model
         private static readonly object padlock = new object();
         private Thread n_server;
         private TcpClient client;
+        private TcpClient client1;
         private TcpListener server;
         private IO io;
         public IO Io
@@ -55,7 +56,9 @@ namespace FlightSimulator.Model
         {
             this.io = new IO();
             this.client = new TcpClient();
-            this.io.client = this.client;
+            this.client1 = new TcpClient();
+            this.io.client = this.client1;
+            this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort);
         }
 
         public static ApplicationModel Instance
@@ -86,17 +89,17 @@ namespace FlightSimulator.Model
         public void Connect()
         {
             
-            this.n_server = new Thread(new ThreadStart(Server));
-            this.n_server.Start();
-            this.client.Connect(FlightServerIP, FlightCommandPort);
+           this.n_server = new Thread(new ThreadStart(Server));
+           this.n_server.Start();
+            this.server.Start();
+            this.client = this.server.AcceptTcpClient();
+            this.client1.Connect(FlightServerIP, FlightCommandPort);
         }
 
         public void Server()
         {
             try
             {
-                this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort);
-                this.server.Start();
                 MessageBox.Show("Before Accpetting");
                 this.io.socket = this.server.AcceptSocket();
                 MessageBox.Show("socket accepted");
