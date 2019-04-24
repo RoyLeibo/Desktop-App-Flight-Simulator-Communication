@@ -113,19 +113,19 @@ namespace FlightSimulator.Model
             String command;
             switch (DataName) {
                 case "Ailron":
-                    command = "set /controls/flight/aileron " + value;
+                    command = "set /controls/flight/aileron " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
                     break;
                 case "Elevator":
-                    command = "set /controls/flight/elevator " + value;
+                    command = "set /controls/flight/elevator " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
                     break;
                 case "Throttle":
-                    command = "set /controls/engines/current-engine/throttle " + value;
+                    command = "set /controls/engines/current-engine/throttle " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
                     break;
                 case "Rudder":
-                    command = "set /controls/flight/rudder " + value; 
+                    command = "set /controls/flight/rudder " + value + "\r\n"; 
                     ByteArray = asen.GetBytes(command);
                     break;
                 default:

@@ -86,9 +86,9 @@ namespace FlightSimulator.Model
         public void Connect()
         {
             
-            this.n_server = new Thread(new ThreadStart(Server));
-            this.n_server.Start();
-            this.client.Connect(FlightServerIP, FlightCommandPort);
+           this.n_server = new Thread(new ThreadStart(Server));
+           this.n_server.Start();
+           this.client.Connect(FlightServerIP, FlightCommandPort);
         }
 
         public void Server()
