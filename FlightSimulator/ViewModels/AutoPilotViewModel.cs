@@ -21,11 +21,6 @@ namespace FlightSimulator.ViewModels
         {
             this.AM = AM;
             isFirstLetter = true;
-            AM.Io.colorEvent += () => {
-                IsPink = false;
-                NotifyPropertyChanged("IsPink");
-                isFirstLetter = true;
-            };
             this.IsPink = false;
         }
 
@@ -74,6 +69,9 @@ namespace FlightSimulator.ViewModels
         }
         private void OkClick()
         {
+            IsPink = false;
+            NotifyPropertyChanged("IsPink");
+            isFirstLetter = true;
             this.AM.Io.SendCommandToSimulator(this.TextFromTextBox);
         }
         #endregion

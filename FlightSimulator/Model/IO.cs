@@ -11,11 +11,9 @@ using System.Windows;
 namespace FlightSimulator.Model
 {
     public delegate void handler();
-    public delegate void whiteScreen();
     public class IO
     {
         public event handler IoEvent;
-        public event whiteScreen colorEvent;
         public Socket socket { get; set; }
         public TcpClient client { get; set; }
         public string command;
@@ -101,7 +99,6 @@ namespace FlightSimulator.Model
                 stream.Flush();
 
             }
-            this.colorEvent?.Invoke();
             this.newThread.Abort();
         }
 
