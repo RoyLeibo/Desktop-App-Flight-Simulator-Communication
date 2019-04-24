@@ -91,9 +91,7 @@ namespace FlightSimulator.Model
            this.n_server = new Thread(new ThreadStart(Server));
           
             this.server.Start();
-            MessageBox.Show("Before Accpetting");
             this.io.socket = this.server.AcceptSocket();
-            MessageBox.Show("socket accepted");
             this.client.Connect(FlightServerIP, FlightCommandPort);
             this.n_server.Start();
         }

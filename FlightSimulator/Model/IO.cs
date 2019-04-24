@@ -35,7 +35,6 @@ namespace FlightSimulator.Model
 
         public void ReadDataFromSimulator(TcpListener client)
         {
-            MessageBox.Show("Inside ReadDataFromSimulator");
             byte[] Buffer = new byte[1024];
             int recv = 0;
             int EndOfLine = 0;
@@ -50,22 +49,20 @@ namespace FlightSimulator.Model
                 StringData = Encoding.ASCII.GetString(Buffer, 0, recv);
                 IsEndOfLine = true;
                 Result = Remainder;
-                while (IsEndOfLine)
+                EndOfLine = StringData.IndexOf('\n');
+                if (EndOfLine != -1)
                 {
-                    EndOfLine = StringData.IndexOf('\n');
-                    if (EndOfLine != -1)
-                    {
-                        Result += StringData.Substring(0, EndOfLine);
-                        StringData.Remove(0, EndOfLine + 1);
-                        ParseAndUpdate(StringData);
-                        Result = "";
-                        Remainder = StringData;
-                    }
-                    else
-                    {
-                        Remainder += StringData;
-                        IsEndOfLine = false;
-                    }
+                    Result += StringData.Substring(0, EndOfLine);
+                    StringData.Remove(0, EndOfLine + 1);
+                    ParseAndUpdate(Result);
+                    Result = "";
+                    Remainder = StringData;
+                    Array.Clear(Buffer, 0, Buffer.Length);
+                }
+                else
+                {
+                    Remainder += StringData;
+                    IsEndOfLine = false;
                 }
             }
         }
@@ -74,10 +71,10 @@ namespace FlightSimulator.Model
         {
             int StartOfLon = 0;
             int EndOfLon = StringData.IndexOf(',', StartOfLon);
-            double Lon = Double.Parse(StringData.Substring(StartOfLon, EndOfLon-StartOfLon));
+            double Lon = Double.Parse(StringData.Substring(StartOfLon, EndOfLon - StartOfLon));
             int StartOfLat = EndOfLon + 1;
-            int EndOfLat = StringData.IndexOf(',', StartOfLat); 
-            double Lat = Double.Parse(StringData.Substring(StartOfLat, EndOfLat-StartOfLat));
+            int EndOfLat = StringData.IndexOf(',', StartOfLat);
+            double Lat = Double.Parse(StringData.Substring(StartOfLat, EndOfLat - StartOfLat));
             this.LonAndLat = new Point(Lat, Lon);
         }
 
@@ -108,22 +105,27 @@ namespace FlightSimulator.Model
             Stream stream = this.client.GetStream();
             byte[] ByteArray;
             String command;
-            switch (DataName) {
+            switch (DataName)
+            {
                 case "Ailron":
                     command = "set /controls/flight/aileron " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
+                    System.Diagnostics.Debug.WriteLine($"Ailron: {value}");
                     break;
                 case "Elevator":
                     command = "set /controls/flight/elevator " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
+                    System.Diagnostics.Debug.WriteLine($"Elevator: {value}");
                     break;
                 case "Throttle":
                     command = "set /controls/engines/current-engine/throttle " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
+                    System.Diagnostics.Debug.WriteLine($"Throttle: {value}");
                     break;
                 case "Rudder":
-                    command = "set /controls/flight/rudder " + value + "\r\n"; 
+                    command = "set /controls/flight/rudder " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
+                    System.Diagnostics.Debug.WriteLine($"Rudder: {value}");
                     break;
                 default:
                     ByteArray = asen.GetBytes("");

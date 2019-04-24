@@ -24,7 +24,7 @@ namespace FlightSimulator.Views
     {
         /// <summary>Current Aileron</summary>
         public static readonly DependencyProperty AileronProperty =
-            DependencyProperty.Register("Aileron", typeof(double), typeof(Joystick),null);
+            DependencyProperty.Register("Aileron", typeof(double), typeof(Joystick), null);
 
         /// <summary>Current Elevator</summary>
         public static readonly DependencyProperty ElevatorProperty =
@@ -146,22 +146,19 @@ namespace FlightSimulator.Views
             double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y));
             if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)
                 return;
-            Aileron = -deltaPos.Y;
-            Elevator = deltaPos.X;
+            Aileron = -deltaPos.Y / 124;
+            Elevator = deltaPos.X / 124;
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
 
             if (Moved == null ||
-                (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
+    (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
-            else
-            {
-                _prevAileron = Aileron;
-                _prevElevator = Elevator;
-            }
 
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
+            _prevAileron = Aileron;
+            _prevElevator = Elevator;
         }
 
         private void Knob_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

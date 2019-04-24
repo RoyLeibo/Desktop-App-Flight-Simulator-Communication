@@ -28,7 +28,7 @@ namespace FlightSimulator.Views
             InitializeComponent();
             ManualPilotViewModel MPVM = new ManualPilotViewModel(ApplicationModel.Instance);
             this.DataContext = MPVM;
-            Joystick.Moved += MPVM.UpdateData;
+            this.Joystick.Moved += MPVM.UpdateData;
         }
     }
 }
