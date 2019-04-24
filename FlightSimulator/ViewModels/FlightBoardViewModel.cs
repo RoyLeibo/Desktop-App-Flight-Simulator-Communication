@@ -18,27 +18,15 @@ namespace FlightSimulator.ViewModels
     {
         public event handler FVBMEvent;
         private ApplicationModel AM;
-        public double Lon
+        public Point LonAndLat
         {
             get
             {
-                return this.Lon;
+                return this.LonAndLat;
             }
             set
             {
-                this.Lon = value;
-            }
-        }
-
-        public double Lat
-        {
-            get
-            {
-                return this.Lat;
-            }
-            set
-            {
-                this.Lat = value;
+                this.LonAndLat = value;
             }
         }
 
@@ -77,9 +65,7 @@ namespace FlightSimulator.ViewModels
             this.AM = ApplicationModel.Instance;
             this.AM.Io.IoEvent += () =>
             {
-                KeyValuePair<double, double> LonAndLat = this.AM.Io.LonAndLat;
-                this.Lon = LonAndLat.Key;
-                this.Lat = LonAndLat.Value;
+                this.LonAndLat = this.AM.Io.LonAndLat;
                 FVBMEvent?.Invoke(this, null);
             };
             AM.Connect();

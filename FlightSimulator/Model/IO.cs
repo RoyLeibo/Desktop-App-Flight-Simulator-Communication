@@ -21,8 +21,8 @@ namespace FlightSimulator.Model
         public string command;
         public Thread newThread;
 
-        private KeyValuePair<double, double> lonAndLat;
-        public KeyValuePair<double, double> LonAndLat
+        private Point lonAndLat;
+        public Point LonAndLat
         {
             get
             {
@@ -33,11 +33,6 @@ namespace FlightSimulator.Model
                 this.lonAndLat = value;
                 IoEvent?.Invoke();
             }
-        }
-
-        public IO(){
-            this.LonAndLat = new KeyValuePair<double, double>(0, 0);
-            this.LonAndLat = new KeyValuePair<double, double>(1, 1);
         }
 
         public void ReadDataFromSimulator(TcpListener client)
@@ -85,9 +80,8 @@ namespace FlightSimulator.Model
             int StartOfLat = EndOfLon + 1;
             int EndOfLat = StringData.IndexOf(',', StartOfLat); 
             double Lat = Double.Parse(StringData.Substring(StartOfLat, EndOfLat-StartOfLat));
-            this.LonAndLat = new KeyValuePair<double, double>(Lon, Lat);
-            MessageBox.Show
-                ("Lon: , Lat:");
+            this.LonAndLat = new Point(Lat, Lon);
+            MessageBox.Show("Lon: , Lat:");
         }
 
         public void SendCommandToSimulator(String command)
