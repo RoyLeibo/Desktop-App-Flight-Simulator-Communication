@@ -13,30 +13,29 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0"
+                        VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1" Text="&#8592;aileron&#8594;"  VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Cursor="Arrow" IsEnabled="False" ></TextBlock>
-                <TextBlock Grid.Column="2" Text="{Binding ElementName=JoyStick, Path=Aileron}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
-            </Grid>
-            <Grid Grid.Row="1" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="25"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="&#8592;rudder&#8594;" VerticalAlignment="Bottom"
-                     FontWeight="Bold" Grid.Row="2" HorizontalAlignment="Center" ></TextBlock>
-                <Slider x:Name="RudderSlider" VerticalAlignment="Bottom" Width="240" TickPlacement="BottomRight" Value="{Binding Rudder}" TickFrequency="0.1" HorizontalAlignment="Center" Maximum="1"  Grid.Row="0" Minimum="-1"></Slider>
-                <TextBlock Text="{Binding ElementName=RudderSlider, Path=Value}" FontWeight="Bold" HorizontalAlignment="Center" Height="43" VerticalAlignment="Bottom" Grid.RowSpan="2" ></TextBlock>
+                <TextBlock Grid.Column="1" 
+                           Text="&#8592;aileron&#8594;"
+                           HorizontalAlignment="Center" 
+                           FontWeight="Bold" 
+                           Cursor="Arrow" 
+                           IsEnabled="False" />
+                <TextBlock Grid.Column="2" 
+                           Text="{Binding Ailron, StringFormat=N1}" 
+                           HorizontalAlignment="Left" 
+                           FontWeight="Bold" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.ColumnDefinitions>
@@ -45,7 +44,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <TextBlock Text="&#8592;throttle&#8594;"  FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock Text="&#8592;throttle&#8594;"  
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"
+                                   RenderTransformOrigin="0.5,0.5" 
+                                   Width="76">
+                            
                             <TextBlock.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="90"/>
@@ -55,7 +60,7 @@
                     </Grid>
                     <Grid Grid.Column="2">
                         <Slider x:Name="ThrottleSlider" Width="80" TickPlacement="BottomRight" Height="220"
-                            Value="{Binding Throttle}" TickFrequency="0.1"                                  Maximum="1" Orientation="Vertical" Minimum="-1" >
+                            Value="{Binding Throttle }" TickFrequency="0.1"                                  Maximum="1" Orientation="Vertical" Minimum="-1" >
                         </Slider>
                         <TextBlock Text="{Binding ElementName=ThrottleSlider, Path=Value}" VerticalAlignment="Top"
                             HorizontalAlignment="Right" FontWeight="Bold" >
@@ -77,8 +82,22 @@
                                 <RotateTransform Angle="90"/>
                             </TransformGroup>
                         </TextBlock.RenderTransform></TextBlock>
-                    <TextBlock Text="{Binding ElementName=JoyStick, Path=Elevator}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+                    <TextBlock Name="ElevatorValueText"  
+                               Text="{Binding Elevator, StringFormat= N1}"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center" 
+                               FontWeight="Bold" ></TextBlock>
                 </Grid>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="&#8592;rudder&#8594;" VerticalAlignment="Bottom"
+                     FontWeight="Bold" Grid.Row="2" HorizontalAlignment="Center" ></TextBlock>
+                <Slider x:Name="RudderSlider" VerticalAlignment="Bottom" Width="300" TickPlacement="BottomRight" Value="{Binding Rudder}" TickFrequency="0.1" HorizontalAlignment="Center" Maximum="1"  Grid.Row="0" Minimum="-1"></Slider>
+                <TextBlock Text="{Binding ElementName=RudderSlider, Path=Value}" FontWeight="Bold" Width="50" HorizontalAlignment="Right" Height="43" VerticalAlignment="Bottom" Grid.RowSpan="2" ></TextBlock>
             </Grid>
         </Grid>
     </Grid>
