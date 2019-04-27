@@ -54,12 +54,14 @@ namespace FlightSimulator.Model
         ApplicationModel()
         {
             this.io = new IO();
-            this.client = new TcpClient();
-           
+            this.client = new TcpClient(); // create client
             this.io.client = this.client;
-            this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort);
+            this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort); // create a server
         }
 
+        /*
+         * Implements Singelton design pattren to the ApplicationModel class.
+         */
         public static ApplicationModel Instance
         {
             get
@@ -85,27 +87,29 @@ namespace FlightSimulator.Model
             Properties.Settings.Default.Reload();
         }
 
+        /*
+         * This function is called when the "Connect" button is clicked.
+         * The function creates new thread for the server and start it.
+         * Moreover, the function accepts a client (the Flight Simulator)
+         * to it's server and connect as a client to the Flight Simulator.
+         */
         public void Connect()
         {
-            
-           this.n_server = new Thread(new ThreadStart(Server));
-          
+            this.n_server = new Thread(new ThreadStart(Server));
             this.server.Start();
             this.io.socket = this.server.AcceptSocket();
             this.client.Connect(FlightServerIP, FlightCommandPort);
             this.n_server.Start();
         }
 
+        /*
+         * This function works in a new thread.
+         * The function call a function from the Io class which
+         * recives data from the simulator
+         */
         public void Server()
         {
-            try
-            {
-                //this.io.ReadDataFromSimulator(this.server);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.StackTrace);
-            }
+                this.io.ReadDataFromSimulator(this.server);
         }
     }
 }

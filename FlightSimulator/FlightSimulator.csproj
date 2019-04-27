@@ -64,15 +64,11 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\ApplicationConnectModel.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
-    <Compile Include="Model\ApplicationSettingsModel.cs" />
-    <Compile Include="Model\AutoPilotModel.cs" />
     <Compile Include="Model\CommandHandler.cs" />
     <Compile Include="Model\EventArgs\VirtualJoystickEventArgs.cs" />
     <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="Model\IO.cs" />
-    <Compile Include="Model\ManualPilotModel.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="ViewModels\AutoPilotViewModel.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />

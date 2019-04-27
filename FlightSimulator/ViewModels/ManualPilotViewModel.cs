@@ -13,6 +13,12 @@ namespace FlightSimulator.ViewModels
     class ManualPilotViewModel : BaseViewModel
     {
         private ApplicationModel VJEA;
+
+        /*
+         * This function has 4 properties which represents each data variable from
+         * the Flight Simulator which can changed by user using the GUI
+         */
+        #region Propeties
         private double rudder;
         public double Rudder
         {
@@ -85,7 +91,13 @@ namespace FlightSimulator.ViewModels
                 }
             }
         }
+        #endregion
 
+        /*
+         * This function is added to the Jostick "Moved" event which is called
+         * when the Joystick is moving and updates the View Model properties with
+         * it's new values after the Joystick move.
+         */
         public void UpdateData(object Sender, VirtualJoystickEventArgs VJEA)
         {
             this.Ailron = VJEA.Aileron;
@@ -94,10 +106,6 @@ namespace FlightSimulator.ViewModels
 
         public ManualPilotViewModel(ApplicationModel VJEA)
         {
-            //this.Rudder = 0.0;
-            //this.Throttle = 0.0;
-            //this.Elevator = 0.0;
-            //this.Ailron = 0.0;
             this.VJEA = VJEA;
         }
     }

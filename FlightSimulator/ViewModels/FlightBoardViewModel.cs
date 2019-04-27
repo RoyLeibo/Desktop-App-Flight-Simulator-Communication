@@ -33,6 +33,9 @@ namespace FlightSimulator.ViewModels
 
         #region Commands
         #region ClickCommand
+        /*
+         * This command is binded to the "Settings" button
+         */
         private ICommand _settingsCommand;
         public ICommand SettingsCommand
         {
@@ -41,6 +44,11 @@ namespace FlightSimulator.ViewModels
                 return _settingsCommand ?? (_settingsCommand = new CommandHandler(() => SettingsClick()));
             }
         }
+        /*
+         * This function creates a new SettingsWindow which is a GUI to the 
+         * settings as required and creates a SettingWindowViewModel to be it's 
+         * data context
+         */
         private void SettingsClick()
         {
            var swvm = new SettingsWindowViewModel(ApplicationModel.Instance);
@@ -52,7 +60,10 @@ namespace FlightSimulator.ViewModels
         #endregion
 
         #region Commands
-        #region ClickCommand
+        #region ConnectCommand
+        /*
+         * This command is binded to the "Connect" button
+         */
         private ICommand _connectCommand;
         public ICommand ConnectCommand
         {
@@ -61,6 +72,15 @@ namespace FlightSimulator.ViewModels
                 return _connectCommand ?? (_connectCommand = new CommandHandler(() => ConnectClick()));
             }
         }
+        /*
+         * This function is calling the ApllicationModel function "Connect", which
+         * connects to the Flight Simulator as client and creates a server which 
+         * the Flight Simulator is it's client.
+         * Moreover, this function creates a no name function to add to the "Io"
+         * class event. When triggered, the function will set the View Model 
+         * LonAndLat point property to be the Io's LonAndLat point and notifies the
+         * View that there was a change.
+         */
         private void ConnectClick()
         {
             this.AM = ApplicationModel.Instance;
@@ -73,7 +93,5 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
         #endregion
-
-
     }
 }
