@@ -72,3 +72,4 @@ namespace FlightSimulator.Model
         /// </summary>
         private readonly Predicate<object> _canExecute;
     }
+}

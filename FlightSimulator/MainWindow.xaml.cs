@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FlightSimulator.ViewModels;
 
 namespace FlightSimulator
 {
@@ -22,6 +23,9 @@ namespace FlightSimulator
         public MainWindow()
         {
             InitializeComponent();
+            MainWindowViewModel MWVM = new MainWindowViewModel();
+            this.DataContext = MWVM;
+            
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

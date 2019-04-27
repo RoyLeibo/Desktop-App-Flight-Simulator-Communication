@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+
 namespace FlightSimulator.ViewModels
 {
     class MainWindowViewModel 
@@ -30,7 +31,7 @@ namespace FlightSimulator.ViewModels
 
         private void CloseWindow()
         {
-            //Do your operations
+            System.Environment.Exit(0);
         }
     }
 }
