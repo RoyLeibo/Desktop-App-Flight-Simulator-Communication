@@ -93,8 +93,11 @@ namespace FlightSimulator.ViewModels
         {
             IsPink = false;
             NotifyPropertyChanged("IsPink");
+            String temp = TextFromTextBox;
+            TextFromTextBox = "";
+            NotifyPropertyChanged("TextFromTextBox");
             isFirstLetter = true;
-            this.AM.Io.SendCommandToSimulator(this.TextFromTextBox);
+            this.AM.Io.SendCommandToSimulator(temp);
         }
         #endregion
 

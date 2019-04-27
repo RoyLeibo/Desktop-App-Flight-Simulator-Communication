@@ -25,7 +25,6 @@ namespace FlightSimulator
             InitializeComponent();
             MainWindowViewModel MWVM = new MainWindowViewModel();
             this.DataContext = MWVM;
-            
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

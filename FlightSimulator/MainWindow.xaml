@@ -7,6 +7,11 @@
         x:Class="FlightSimulator.MainWindow"
         mc:Ignorable="d"
         Title="FlightSimulator" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+    <Window.Style>
+        <Style TargetType="Window">
+            
+        </Style>
+    </Window.Style>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>

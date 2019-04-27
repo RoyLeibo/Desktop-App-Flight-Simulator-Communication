@@ -18,7 +18,6 @@ namespace FlightSimulator.Model
         public TcpClient client { get; set; }
         public string command;
         public Thread newThread;
-
         private Point lonAndLat;
         public Point LonAndLat
         {
@@ -43,6 +42,7 @@ namespace FlightSimulator.Model
          */
         public void ReadDataFromSimulator(TcpListener client)
         {
+            ApplicationModel AM = ApplicationModel.Instance;
             byte[] Buffer = new byte[1024];
             int recv = 0;
             int EndOfLine = 0;
@@ -51,6 +51,10 @@ namespace FlightSimulator.Model
             String Remainder = "";
             while (true)
             {
+                if (AM.isProgramFinished)
+                {
+                    break;
+                }
                 StringData = "";
                 // reads data from simulator into buffer in bytes
                 recv = this.socket.Receive(Buffer);
@@ -107,6 +111,7 @@ namespace FlightSimulator.Model
         {
             this.command = command;
             this.newThread = new Thread(new ThreadStart(FunctionInThread));
+            this.newThread.Start();
         }
 
         /*
@@ -119,7 +124,7 @@ namespace FlightSimulator.Model
         {
             ASCIIEncoding asen = new ASCIIEncoding();
             Stream stream = this.client.GetStream();
-            string[] CommandsArray = command.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string[] CommandsArray = command.Split(new[] { "\r\n", "\r", "\n", ";"}, StringSplitOptions.None);
             foreach (string Command in CommandsArray)
             {
                 byte[] ByteArray = asen.GetBytes(command);

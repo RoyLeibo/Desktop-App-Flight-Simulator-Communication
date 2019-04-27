@@ -31,7 +31,7 @@ namespace FlightSimulator.ViewModels
 
         private void CloseWindow()
         {
-            System.Environment.Exit(0);
+            ApplicationModel.Instance.isProgramFinished = true;
         }
     }
 }

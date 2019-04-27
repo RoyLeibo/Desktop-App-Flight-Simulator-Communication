@@ -15,7 +15,7 @@ namespace FlightSimulator.ViewModels
         private ApplicationModel VJEA;
 
         /*
-         * This function has 4 properties which represents each data variable from
+         * This class has 4 properties which represents each data variable from
          * the Flight Simulator which can changed by user using the GUI
          */
         #region Propeties

@@ -19,6 +19,7 @@ namespace FlightSimulator.Model
         private Thread n_server;
         private TcpClient client;
         private TcpListener server;
+        public bool isProgramFinished { get; set; }
         private IO io;
         public IO Io
         {
@@ -57,6 +58,7 @@ namespace FlightSimulator.Model
             this.client = new TcpClient(); // create client
             this.io.client = this.client;
             this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort); // create a server
+            isProgramFinished = false;
         }
 
         /*
@@ -109,7 +111,10 @@ namespace FlightSimulator.Model
          */
         public void Server()
         {
-                this.io.ReadDataFromSimulator(this.server);
+            this.io.ReadDataFromSimulator(this.server);
+            this.n_server.Abort();
+            this.client.Close();
+            this.server.Stop();
         }
     }
 }
