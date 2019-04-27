@@ -94,10 +94,10 @@ namespace FlightSimulator.ViewModels
 
         public ManualPilotViewModel(ApplicationModel VJEA)
         {
-            this.Rudder = 0.0;
-            this.Throttle = 0.0;
-            this.Elevator = 0.0;
-            this.Ailron = 0.0;
+            //this.Rudder = 0.0;
+            //this.Throttle = 0.0;
+            //this.Elevator = 0.0;
+            //this.Ailron = 0.0;
             this.VJEA = VJEA;
         }
     }

@@ -100,7 +100,7 @@ namespace FlightSimulator.Model
         {
             try
             {
-                this.io.ReadDataFromSimulator(this.server);
+                //this.io.ReadDataFromSimulator(this.server);
             }
             catch (Exception e)
             {

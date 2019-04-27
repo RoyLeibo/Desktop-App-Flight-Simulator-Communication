@@ -73,9 +73,11 @@
     <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="Model\IO.cs" />
     <Compile Include="Model\ManualPilotModel.cs" />
+    <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="ViewModels\AutoPilotViewModel.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\FlightBoardViewModel.cs" />
     <Compile Include="ViewModels\ManualPilotViewModel.cs" />
     <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />

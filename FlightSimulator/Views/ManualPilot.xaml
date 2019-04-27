@@ -9,9 +9,9 @@
     <Grid Background="White">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"
                         VerticalAlignment="Center">
@@ -33,71 +33,123 @@
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <TextBlock Text="&#8592;throttle&#8594;"  
+                    <TextBlock Grid.Column="0"
+                            Text="&#8592;throttle&#8594;"  
                                    FontWeight="Bold"
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center"
-                                   RenderTransformOrigin="0.5,0.5" 
-                                   Width="76">
-                            
-                            <TextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="90"/>
-                                </TransformGroup>
-                            </TextBlock.RenderTransform>
-                        </TextBlock>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <Slider x:Name="ThrottleSlider" Width="80" TickPlacement="BottomRight" Height="220"
-                            Value="{Binding Throttle }" TickFrequency="0.1"                                  Maximum="1" Orientation="Vertical" Minimum="-1" >
-                        </Slider>
-                        <TextBlock Text="{Binding ElementName=ThrottleSlider, Path=Value}" VerticalAlignment="Top"
-                            HorizontalAlignment="Right" FontWeight="Bold" >
-                        </TextBlock>
-                    </Grid>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <local:Joystick x:Name="Joystick"  HorizontalAlignment="Center" VerticalAlignment="Center" Aileron="{Binding Ailron}" Elevator="{Binding Elevator}"/>
-                </Grid>
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="19*"/>
-                        <RowDefinition Height="156*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="&#8592;elevator&#8594;" Width="70" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" 
-                     VerticalAlignment="Center" FontWeight="Bold" Grid.Row="1">
+                                   RenderTransformOrigin="0.5,0.5">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="90"/>
                             </TransformGroup>
-                        </TextBlock.RenderTransform></TextBlock>
-                    <TextBlock Name="ElevatorValueText"  
-                               Text="{Binding Elevator, StringFormat= N1}"
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <Grid VerticalAlignment="Center" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                        Text="{Binding ElementName=ThrottleSlider, Path=Value, StringFormat= N1}" 
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Right" 
+                                   FontWeight="Bold" >
+                        </TextBlock>
+                        <Slider x:Name="ThrottleSlider"
+                                Grid.Row="1"
+                                Orientation="Vertical" 
+                                VerticalAlignment="Center"
+                                MinHeight="300"
+                                Value="{Binding Throttle}" 
+                                TickPlacement="BottomRight" 
+                                TickFrequency="0.1"
+                                Maximum="1" 
+                                Minimum="-1">
+                        </Slider>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <local:Joystick x:Name="Joystick"
+                                    MinWidth="340"
+                                    MinHeight="340"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" 
+                                    Aileron="{Binding Ailron, Mode=TwoWay}" 
+                                    Elevator="{Binding Elevator, Mode=TwoWay}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--Text="{Binding Elevator, StringFormat= N1}"-->
+                    <TextBlock Grid.Row="0"
+                               Name="ElevatorValueText"  
+                               Text="0.0"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Center" 
-                               FontWeight="Bold" ></TextBlock>
+                               FontWeight="Bold">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="90"/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1"
+                               Text="&#8592;elevator&#8594;" 
+                               RenderTransformOrigin="0.5,0.5" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" 
+                               FontWeight="Bold">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="90"/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="&#8592;rudder&#8594;" VerticalAlignment="Bottom"
-                     FontWeight="Bold" Grid.Row="2" HorizontalAlignment="Center" ></TextBlock>
-                <Slider x:Name="RudderSlider" VerticalAlignment="Bottom" Width="300" TickPlacement="BottomRight" Value="{Binding Rudder}" TickFrequency="0.1" HorizontalAlignment="Center" Maximum="1"  Grid.Row="0" Minimum="-1"></Slider>
-                <TextBlock Text="{Binding ElementName=RudderSlider, Path=Value}" FontWeight="Bold" Width="50" HorizontalAlignment="Right" Height="43" VerticalAlignment="Bottom" Grid.RowSpan="2" ></TextBlock>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="RudderSlider"
+                        Grid.Row="0" 
+                        MinWidth="300" 
+                        TickPlacement="BottomRight" 
+                        Value="{Binding Rudder}" 
+                        TickFrequency="0.1" 
+                        HorizontalAlignment="Center" 
+                        Maximum="1"  
+                        Minimum="-1" />
+                    <TextBlock Grid.Row="1"
+                    Text="{Binding ElementName=RudderSlider, Path=Value, StringFormat= N1}" 
+                           FontWeight="Bold" 
+                           Margin="0,0,25,0"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment="Center" />
+                </Grid>
+                <TextBlock Grid.Row="1"
+                           Text="&#8592;rudder&#8594;"
+                           VerticalAlignment="Bottom"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center" />
             </Grid>
         </Grid>
     </Grid>
