@@ -17,6 +17,7 @@ namespace FlightSimulator.Model
         private static ApplicationModel instance = null;
         private static readonly object padlock = new object();
         public Thread n_server { get; set; }
+        Thread connectThread { get; set; }
         public TcpClient client { get; set; }
         public TcpListener server { get; set; }
         public bool isConnected { get; set; }
@@ -97,7 +98,7 @@ namespace FlightSimulator.Model
          */
         public void Connect()
         {
-            Thread connectThread = new Thread(new ThreadStart(ConnectInOtherThread));
+            this.connectThread = new Thread(new ThreadStart(ConnectInOtherThread));
             connectThread.Start();
         }
 
@@ -109,6 +110,7 @@ namespace FlightSimulator.Model
             this.client.Connect(FlightServerIP, FlightCommandPort);
             this.isConnected = true;
             this.n_server.Start();
+            this.connectThread.Abort();
         }
 
         /*

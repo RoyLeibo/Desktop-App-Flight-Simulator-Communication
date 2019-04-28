@@ -59,9 +59,9 @@ namespace FlightSimulator.Model
                 StringData = Encoding.ASCII.GetString(Buffer, 0, recv);
                 Result = Remainder;
                 isEndOfLine = true;
-                // finding the closest end of line
                 while (isEndOfLine)
                 {
+                    // finding the closest end of line
                     EndOfLine = StringData.IndexOf('\n');
                     if (EndOfLine != -1)
                     {
