@@ -16,10 +16,20 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="1"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="1"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Content="Connect" HorizontalAlignment="Right" Grid.Column="0"
+            <Button Content="Disconnect" HorizontalAlignment="Right" Grid.Column="0" Command="{Binding DisconnectCommand}" VerticalAlignment="Center" Width="75">
+                <Button.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="Gray" Offset="0" />
+                        <GradientStop Color="White" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Connect" HorizontalAlignment="Center" Grid.Column="2"
                 Command="{Binding ConnectCommand}"                  VerticalAlignment="Center" Width="75">
                 <Button.Background>
                     <LinearGradientBrush>
@@ -28,12 +38,12 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button Content="Settings" HorizontalAlignment="Left" Grid.Column="2" 
+            <Button Content="Settings" HorizontalAlignment="Left" Grid.Column="4" 
                      VerticalAlignment="Center" Width="75" Command="{Binding SettingsCommand}">
                 <Button.Background>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" SpreadMethod="Reflect">
-                        <GradientStop Color="Gray" Offset="0.1" />
-                        <GradientStop Color="White" Offset="1.0" />
+                    <LinearGradientBrush>
+                        <GradientStop Color="Gray" Offset="0" />
+                        <GradientStop Color="White" Offset="1" />
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>

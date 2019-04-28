@@ -48,8 +48,7 @@ namespace FlightSimulator.Views
             var Sender = sender as FlightBoardViewModel;
             if (Sender != null)
             {
-                Point p1 = Sender.LonAndLat;
-                planeLocations.AppendAsync(Dispatcher, p1);
+                planeLocations.AppendAsync(Dispatcher, Sender.LonAndLat);
             }
         }
     }

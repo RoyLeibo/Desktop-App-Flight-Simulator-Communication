@@ -51,10 +51,6 @@ namespace FlightSimulator.Model
             String Remainder = "";
             while (true)
             {
-                if (AM.isProgramFinished)
-                {
-                    break;
-                }
                 StringData = "";
                 // reads data from simulator into buffer in bytes
                 recv = this.socket.Receive(Buffer);
@@ -154,22 +150,18 @@ namespace FlightSimulator.Model
                 case "Ailron":
                     command = "set /controls/flight/aileron " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
-                    System.Diagnostics.Debug.WriteLine($"Ailron: {value}");
                     break;
                 case "Elevator":
                     command = "set /controls/flight/elevator " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
-                    System.Diagnostics.Debug.WriteLine($"Elevator: {value}");
                     break;
                 case "Throttle":
                     command = "set /controls/engines/current-engine/throttle " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
-                    System.Diagnostics.Debug.WriteLine($"Throttle: {value}");
                     break;
                 case "Rudder":
                     command = "set /controls/flight/rudder " + value + "\r\n";
                     ByteArray = asen.GetBytes(command);
-                    System.Diagnostics.Debug.WriteLine($"Rudder: {value}");
                     break;
                 default:
                     ByteArray = asen.GetBytes("");

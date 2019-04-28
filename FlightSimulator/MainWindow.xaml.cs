@@ -23,18 +23,6 @@ namespace FlightSimulator
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel MWVM = new MainWindowViewModel();
-            this.DataContext = MWVM;
-        }
-
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void Joystick_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

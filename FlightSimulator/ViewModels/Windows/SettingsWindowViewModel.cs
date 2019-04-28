@@ -20,6 +20,9 @@ namespace FlightSimulator.ViewModels.Windows
             this.model = model;
         }
 
+        /*
+         * The Flight Simulator IP property
+         */
         public string FlightServerIP
         {
             get { return model.FlightServerIP; }
@@ -30,6 +33,9 @@ namespace FlightSimulator.ViewModels.Windows
             }
         }
 
+        /*
+         * The Flight Simulator command port property
+         */
         public int FlightCommandPort
         {
             get { return model.FlightCommandPort; }
@@ -40,6 +46,9 @@ namespace FlightSimulator.ViewModels.Windows
             }
         }
 
+        /*
+         * The Flight Simulator command info property
+         */
         public int FlightInfoPort
         {
             get { return model.FlightInfoPort; }
@@ -50,11 +59,17 @@ namespace FlightSimulator.ViewModels.Windows
             }
         }
 
+        /*
+         * Calling the SaveSettings function in the model
+         */
         public void SaveSettings()
         {
             model.SaveSettings();
         }
 
+        /*
+         * Calling the ReloadSetting function in the model
+         */
         public void ReloadSettings()
         {
             model.ReloadSettings();
@@ -62,6 +77,9 @@ namespace FlightSimulator.ViewModels.Windows
 
         #region Commands
         #region ClickCommand
+        /*
+         * This command is binded to the "Ok" button and saves the settings data
+         */
         private ICommand _okCommand;
         public ICommand OkCommand
         {
@@ -78,6 +96,10 @@ namespace FlightSimulator.ViewModels.Windows
         #endregion
 
         #region CancelCommand
+
+        /*
+         * This command is binded to the "Clear" button and clears the settings data
+         */
         private ICommand _cancelCommand;
         public ICommand CancelCommand
         {

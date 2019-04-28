@@ -116,8 +116,6 @@ C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\
 C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\FlightSimulator.pdb
 C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\Windows\SettingsWindow.g.cs
 C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\Windows\SettingsWindow.baml
-C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\FlightMonitor.g.cs
-C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\FlightMonitor.baml
 C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\AutoPilot.g.cs
 C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\ManualPilot.g.cs
 C:\Users\roy\Source\Repos\Flight-Simulator-Communication-By-GUI\FlightSimulator\obj\Debug\Views\AutoPilot.baml

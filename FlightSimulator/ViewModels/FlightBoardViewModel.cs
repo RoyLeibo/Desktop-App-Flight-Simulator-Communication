@@ -51,10 +51,10 @@ namespace FlightSimulator.ViewModels
          */
         private void SettingsClick()
         {
-           var swvm = new SettingsWindowViewModel(ApplicationModel.Instance);
-           var sw = new SettingsWindow() {DataContext = swvm};
-           swvm.OnRequestClose += (s, e) => sw.Close();
-           sw.Show();
+            var swvm = new SettingsWindowViewModel(ApplicationModel.Instance);
+            var sw = new SettingsWindow() { DataContext = swvm };
+            swvm.OnRequestClose += (s, e) => sw.Close();
+            sw.Show();
         }
         #endregion
         #endregion
@@ -92,6 +92,29 @@ namespace FlightSimulator.ViewModels
             AM.Connect();
         }
         #endregion
+
+        /*
+         * This command is binded to the Disconnect button and when triggred, the 
+         * function closes the communication threads and the sockets. In the end,
+         * the function closes the program
+         */
+        private ICommand _disconnectCommand;
+        public ICommand DisconnectCommand
+        {
+            get
+            {
+                return _disconnectCommand ?? (_disconnectCommand = new CommandHandler(() => CloseWindow()));
+            }
+        }
+
+        private void CloseWindow()
+        {
+            ApplicationModel AM = ApplicationModel.Instance;
+            AM.n_server.Abort();
+            AM.client.Close();
+            AM.server.Stop();
+            System.Environment.Exit(0);
+        }
         #endregion
     }
 }
