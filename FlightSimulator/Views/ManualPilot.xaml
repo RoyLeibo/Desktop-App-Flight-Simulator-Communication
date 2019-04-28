@@ -60,7 +60,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0"
-                        Text="{Binding ElementName=ThrottleSlider, Path=Value, StringFormat= G1}" 
+                        Text="{Binding ElementName=ThrottleSlider, Path=Value, StringFormat= N1}" 
                                    VerticalAlignment="Top"
                                    HorizontalAlignment="Right" 
                                    FontWeight="Bold" >
@@ -92,9 +92,10 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <!--Text="{Binding Elevator, StringFormat= N1}"-->
                     <TextBlock Grid.Row="0"
                                Name="ElevatorValueText"  
-                               Text="{Binding Elevator, StringFormat= N1}"
+                               Text="0.0"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Center" 
                                FontWeight="Bold">
@@ -138,7 +139,7 @@
                         Maximum="1"  
                         Minimum="-1" />
                     <TextBlock Grid.Row="1"
-                    Text="{Binding ElementName=RudderSlider, Path=Value, StringFormat= G1}" 
+                    Text="{Binding ElementName=RudderSlider, Path=Value, StringFormat= N1}" 
                            FontWeight="Bold" 
                            Margin="0,0,25,0"
                            HorizontalAlignment="Right" 
