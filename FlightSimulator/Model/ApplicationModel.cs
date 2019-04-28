@@ -17,10 +17,8 @@ namespace FlightSimulator.Model
         private static ApplicationModel instance = null;
         private static readonly object padlock = new object();
         public Thread n_server { get; set; }
-        Thread connectThread { get; set; }
         public TcpClient client { get; set; }
         public TcpListener server { get; set; }
-        public bool isConnected { get; set; }
         private IO io;
         public IO Io
         {
@@ -59,7 +57,6 @@ namespace FlightSimulator.Model
             this.client = new TcpClient(); // create client
             this.io.client = this.client;
             this.server = new TcpListener(IPAddress.Parse(FlightServerIP), FlightInfoPort); // create a server
-            this.isConnected = false;
         }
 
         /*
@@ -98,19 +95,11 @@ namespace FlightSimulator.Model
          */
         public void Connect()
         {
-            this.connectThread = new Thread(new ThreadStart(ConnectInOtherThread));
-            connectThread.Start();
-        }
-
-        public void ConnectInOtherThread()
-        {
             this.n_server = new Thread(new ThreadStart(Server));
             this.server.Start();
             this.io.socket = this.server.AcceptSocket();
             this.client.Connect(FlightServerIP, FlightCommandPort);
-            this.isConnected = true;
             this.n_server.Start();
-            this.connectThread.Abort();
         }
 
         /*
