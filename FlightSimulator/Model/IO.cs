@@ -29,7 +29,7 @@ namespace FlightSimulator.Model
             {
                 this.lonAndLat = value;
                 // notify the view model that this property is changed
-                IoEvent?.Invoke(); 
+                IoEvent?.Invoke();
             }
         }
 
@@ -42,8 +42,8 @@ namespace FlightSimulator.Model
          */
         public void ReadDataFromSimulator(TcpListener client)
         {
-            ApplicationModel AM = ApplicationModel.Instance;
             byte[] Buffer = new byte[1024];
+            bool isEndOfLine;
             int recv = 0;
             int EndOfLine = 0;
             String StringData = "";
@@ -52,30 +52,35 @@ namespace FlightSimulator.Model
             while (true)
             {
                 StringData = "";
+                Array.Clear(Buffer, 0, Buffer.Length);
                 // reads data from simulator into buffer in bytes
                 recv = this.socket.Receive(Buffer);
                 // convert bytes recieved into a string
                 StringData = Encoding.ASCII.GetString(Buffer, 0, recv);
                 Result = Remainder;
+                isEndOfLine = true;
                 // finding the closest end of line
-                EndOfLine = StringData.IndexOf('\n'); 
-                if (EndOfLine != -1)
+                while (isEndOfLine)
                 {
-                    // An end of line is found, the function adds the remaining 
-                    // data into the Result string and take it of from StringData.
-                    Result += StringData.Substring(0, EndOfLine);
-                    StringData.Remove(0, EndOfLine + 1);
-                    ParseAndUpdate(Result);
-                    // clear Result and Buffer
-                    Result = "";
-                    Array.Clear(Buffer, 0, Buffer.Length);
-                    Remainder = StringData;
-                }
-                else
-                {
-                    // An end of line is not found, move the data to the remainder
-                    // and start loop again
-                    Remainder += StringData;
+                    EndOfLine = StringData.IndexOf('\n');
+                    if (EndOfLine != -1)
+                    {
+                        // An end of line is found, the function adds the remaining
+                        // data into the Result string and take it of from StringData.
+                        Result += StringData.Substring(0, EndOfLine);
+                        StringData = StringData.Substring(EndOfLine + 1);
+                        ParseAndUpdate(Result);
+                        // clear Result and Buffer
+                        Result = "";
+                        Remainder = "";
+                    }
+                    else
+                    {
+                        // An end of line is not found, move the data to the remainder
+                        // and start loop again
+                        Remainder += StringData;
+                        isEndOfLine = false;
+                    }
                 }
             }
         }
@@ -105,9 +110,13 @@ namespace FlightSimulator.Model
          */
         public void SendCommandToSimulator(String command)
         {
-            this.command = command;
-            this.newThread = new Thread(new ThreadStart(FunctionInThread));
-            this.newThread.Start();
+            ApplicationModel AM = ApplicationModel.Instance;
+            if (AM.isConnected)
+            {
+                this.command = command;
+                this.newThread = new Thread(new ThreadStart(FunctionInThread));
+                this.newThread.Start();
+            }
         }
 
         /*
@@ -120,10 +129,10 @@ namespace FlightSimulator.Model
         {
             ASCIIEncoding asen = new ASCIIEncoding();
             Stream stream = this.client.GetStream();
-            string[] CommandsArray = command.Split(new[] { "\r\n", "\r", "\n", ";"}, StringSplitOptions.None);
+            string[] CommandsArray = command.Split(new[] { "\r\n", "\r", "\n", ";" }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string Command in CommandsArray)
             {
-                byte[] ByteArray = asen.GetBytes(command);
+                byte[] ByteArray = asen.GetBytes(Command + "\r\n");
                 stream.Write(ByteArray, 0, ByteArray.Length);
                 stream.Flush();
                 System.Threading.Thread.Sleep(2000);
@@ -140,35 +149,39 @@ namespace FlightSimulator.Model
          */
         public void UpdateDataInSimulator(String DataName, double value)
         {
-            ASCIIEncoding asen = new ASCIIEncoding();
-            Stream stream = this.client.GetStream();
-            byte[] ByteArray;
-            String command;
-            // Switch case for the propery name
-            switch (DataName)
+            ApplicationModel AM = ApplicationModel.Instance;
+            if (AM.isConnected)
             {
-                case "Ailron":
-                    command = "set /controls/flight/aileron " + value + "\r\n";
-                    ByteArray = asen.GetBytes(command);
-                    break;
-                case "Elevator":
-                    command = "set /controls/flight/elevator " + value + "\r\n";
-                    ByteArray = asen.GetBytes(command);
-                    break;
-                case "Throttle":
-                    command = "set /controls/engines/current-engine/throttle " + value + "\r\n";
-                    ByteArray = asen.GetBytes(command);
-                    break;
-                case "Rudder":
-                    command = "set /controls/flight/rudder " + value + "\r\n";
-                    ByteArray = asen.GetBytes(command);
-                    break;
-                default:
-                    ByteArray = asen.GetBytes("");
-                    break;
+                ASCIIEncoding asen = new ASCIIEncoding();
+                Stream stream = this.client.GetStream();
+                byte[] ByteArray;
+                String command;
+                // Switch case for the propery name
+                switch (DataName)
+                {
+                    case "Ailron":
+                        command = "set /controls/flight/aileron " + value + "\r\n";
+                        ByteArray = asen.GetBytes(command);
+                        break;
+                    case "Elevator":
+                        command = "set /controls/flight/elevator " + value + "\r\n";
+                        ByteArray = asen.GetBytes(command);
+                        break;
+                    case "Throttle":
+                        command = "set /controls/engines/current-engine/throttle " + value + "\r\n";
+                        ByteArray = asen.GetBytes(command);
+                        break;
+                    case "Rudder":
+                        command = "set /controls/flight/rudder " + value + "\r\n";
+                        ByteArray = asen.GetBytes(command);
+                        break;
+                    default:
+                        ByteArray = asen.GetBytes("");
+                        break;
+                }
+                stream.Write(ByteArray, 0, ByteArray.Length);
+                stream.Flush();
             }
-            stream.Write(ByteArray, 0, ByteArray.Length);
-            stream.Flush();
         }
     }
 }
